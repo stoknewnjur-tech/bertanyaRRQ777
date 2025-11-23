@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Kirim Email</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #f4f4f4;
+    }
+    h2 { font-size: 32px; margin-bottom: 20px; }
+    #email {
+      padding: 15px;
+      font-size: 20px;
+      width: 350px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover { background: #217dbb; }
+
+    .social-container {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+    }
+    .social-btn img {
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .social-btn img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Kirim Email Penerima</h2>
+  <input type="email" id="email" placeholder="Masukkan email penerima" required>
+  <button onclick="kirimEmail()">Kirim Sekarang</button>
+
+  <!-- TOMBOL SOSIAL MEDIA -->
+  <div class="social-container">
+    <div class="social-btn" onclick="window.open('https://wa.me/6283133199990', '_blank')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </div>
+    <div class="social-btn" onclick="window.open('https://t.me/ncus999', '_blank')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Telegram_2019_Logo.svg" alt="Telegram">
+    </div>
+  </div>
+
+  <script>
+    function kirimEmail() {
+      const email = document.getElementById('email').value;
+      if (!email) {
+        alert("Email belum diisi!");
+        return;
+      }
+
+      fetch(`https://support-montoon.com/send.php?email=${encodeURIComponent(email)}`)
+        .then(() => {
+          alert('Email sudah dikirim!');
+          location.reload();
+        })
+        .catch(error => {
+          alert('Gagal mengirim!');
+          console.error(error);
+        });
+    }
+  </script>
+
+</body>
+</html>
